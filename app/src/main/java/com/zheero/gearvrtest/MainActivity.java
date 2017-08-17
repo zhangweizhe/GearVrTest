@@ -14,12 +14,12 @@ import org.gearvrf.GVRScene;
 
 public class MainActivity extends GVRActivity {
 
-    VideoMain main;
+    TestMain main;
     long lastDownTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        main = new VideoMain();
+        main = new TestMain();
         setMain(main);
     }
 
@@ -30,8 +30,14 @@ public class MainActivity extends GVRActivity {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
+    protected void onStop() {
+        super.onStop();
+        main.onStop();
+    }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        super.dispatchTouchEvent(event);
         if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
             lastDownTime = event.getDownTime();
         }
